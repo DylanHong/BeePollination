@@ -4,10 +4,13 @@ def transmat1(dim1,dim2):
     dim = dim1 * dim2
 
     #Build matrix with zeros
-    matrix = np.zeros([dim, dim])
+    matrix = np.zeros([dim+2, dim+2])
 
     #populate transition matrix
-    
+    for i in range(dim+2):
+        for j in range(dim+2):
+            if math.abs(i-j)
+                matrix[i][j] = 
 
 
 
