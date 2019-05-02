@@ -1,49 +1,20 @@
 import numpy as np
 
-def transmat1(dim1,dim2):
-    dim = dim1 * dim2
+#Equal probability of each sqare and itself
+def transmat_simple(dims):
+    dim_trans = dims**2  # transition matrix is n squared by n squared
 
-    #Build matrix with zeros
-    matrix = np.zeros([dim+2, dim+2])
+    # build matrix with zeros
+    matrix = np.zeros([dim_trans, dim_trans])
 
     #populate transition matrix
-    for i in range(dim+2):
-        for j in range(dim+2):
-            if math.abs(i-j)
-                matrix[i][j] = 
+    for i in range(dim_trans):
+        for j in range(dim_trans):
+            if i == j:
+                matrix[i][j] += 0.2
+                matrix[i][min(dim_trans-1, j+1)] += 0.2
+                matrix[i][max(0, j-1)] += 0.2
+                matrix[i][min(j+dims, dim_trans-1)] += 0.2
+                matrix[i][max(0, j-dims)] += 0.2
 
-
-
-    return matrix
-
-
-
-# transition model:
-    # generates a 16x16 matrix describing probability of moving from any square
-    # to any other
-    def compute_transition_model(self):
-
-        # empty transition matrix
-        trans_matrix = np.zeros((16, 16))
-
-        # loop through the maze
-        for y, column in enumerate(self.start_state):
-            for x, value in enumerate(column):
-
-                # convert to what value would be in a 1x16 array
-                current = self.one_dimize((x, y))
-
-                # get neighbors and track the total possible moves from square
-                moves = self.get_moves((x, y))
-                total_moves = len(moves)
-
-                # for each move, incrememnt the probability in the matrix by
-                # 1/total (probability of making that move from that square)
-                for move in moves:
-                    next = self.one_dimize(move)
-                    trans_matrix[next, current] += 1/total_moves
-
-        # transpose for multiplication
-        return np.transpose(trans_matrix)
-
-    # returns a list of legal moves from a given square (tuple)
+    return np.transpose(matrix)

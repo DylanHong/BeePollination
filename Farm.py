@@ -1,4 +1,5 @@
 import numpy as np
+from TransMatrix import *
 
 # class for simulating bee pollination on a farm (modeled as a grid)
 class Farm:
@@ -21,13 +22,11 @@ class Farm:
         for loc in self.locs:
             self.field[loc[0], loc[1]] = hive_size
 
-
 # some test code
 hives = [(0, 0), (3, 0)]
 dims = 4
 size = 100
-trans_mat = np.zeros([dims**2, dims**2])
-
+trans_mat = transmat_simple(dims)
 problem = Farm(dims, hives, size, .5, trans_mat)
 
 print(problem.field)
