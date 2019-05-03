@@ -1,5 +1,8 @@
 import numpy as np
 from TransMatrix import *
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 # class for simulating bee pollination on a farm (modeled as a grid)
 class Farm:
@@ -62,7 +65,7 @@ class Farm:
 
 
 # some test code
-hives = [(0, 0)]
+hives = [(5, 5)]
 dims = 10
 size = 1000
 trans_mat = transmat_simple(dims)
@@ -73,8 +76,5 @@ problem.pollinateSeason(10,20)
 print(problem.pmelons)
 print(problem.melons)
 
-# print(problem.field)
-# problem.pollinateDay(40)
-# print(problem.field)
-# print(problem.pmelons)
-# print(problem.melons)
+ax = sns.heatmap(problem.pmelons)
+plt.show(ax)
