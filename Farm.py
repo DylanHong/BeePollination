@@ -65,14 +65,16 @@ class Farm:
             self.field = self.of.copy()
 
 
-def optimize(dims,size,.1,trans_mat,steps,days):
+def optimize(dims,size,pr,trans_mat,steps,days):
     totals = {}
-    for i in range(self.dims**2):
+    for i in range(dims**2):
         mod = i%dims
-        newi = i/dims
-        curr = Farm(dims,[(newi,mod)])
+        newi = int(i/dims)
+        print(mod)
+        print(newi)
+        curr = Farm(dims,[(newi,mod)],size,pr,trans_mat)
         curr.pollinateSeason(steps,days)
-        totals[i] = np.sum(curr.pmelons)
+        totals[(newi,mod)] = np.sum(curr.pmelons)
 
     max_value = max(totals.values())  # maximum value
     max_keys = [k for k, v in totals.items() if v == max_value] # getting all keys containing the `maximum`
@@ -87,11 +89,13 @@ trans_mat = transmat_simple(dims)
 problem = Farm(dims, hives, size, .1, trans_mat)
 problem.pollinateSeason(10,20)
 
-dims = 10
-size = 1000
+dims = 3
+size = 100
+steps = 5
+days = 25
 trans_mat = transmat_simple(dims)
-
-
+vals = optimize(dims,size, .1,trans_mat,steps,days)
+print(vals)
 
 # print(problem.pmelons)
 # print(problem.melons)
