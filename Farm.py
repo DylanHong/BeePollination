@@ -82,21 +82,22 @@ def optimize(dims,size,pr,trans_mat,steps,days):
     return max_value, max_keys
 
 # some test code
-hives = [(5, 5)]
-dims = 10
-size = 1000
-trans_mat = transmat_simple(dims)
-problem = Farm(dims, hives, size, .1, trans_mat)
-problem.pollinateSeason(10,20)
+# hives = [(5, 5)]
+# dims = 10
+# size = 1000
+# trans_mat = transmat_simple(dims)
+# problem = Farm(dims, hives, size, .1, trans_mat)
+# problem.pollinateSeason(10,20)
+#
+# dims = 5
+# size = 100
+# steps = 5
+# days = 15
+# trans_mat = transmat_simple(dims)
+# vals = optimize(dims,size, .1,trans_mat,steps,days)
+# print(vals)
 
-dims = 5
-size = 100
-steps = 5
-days = 15
-trans_mat = transmat_simple(dims)
-vals = optimize(dims,size, .1,trans_mat,steps,days)
-print(vals)
-
+test = transmat_moderate(4)
 
 # print(problem.pmelons)
 # print(problem.melons)
