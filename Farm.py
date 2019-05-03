@@ -25,6 +25,8 @@ class Farm:
         for loc in self.locs:
             self.field[loc[0], loc[1]] = hive_size
 
+        self.of = self.field.copy()
+
     def timestep(self):
         #field = self.field
         # reshape the matrix for multiplication
@@ -32,14 +34,14 @@ class Farm:
 
         # multiply the matrices
         self.field = np.matmul(self.field, self.transition)
-        self.field = np.round(self.field)
+        #self.field = np.round(self.field)
 
         # reshape back to original dimensions
         self.field = np.reshape(self.field, (self.dims,self.dims))
 
         #return field
 
-    def pollinate(self,steps):
+    def pollinateDay(self,steps):
         for i in range(steps):
             # update bee locations
             self.timestep()
@@ -53,16 +55,26 @@ class Farm:
 
             self.melons -= self.pmelons
 
+    def pollinateSeason(self,steps,days):
+        for i in range(days):
+            self.pollinateDay(steps)
+            self.field = self.of.copy()
+
 
 # some test code
-hives = [(0, 0), (3, 0)]
-dims = 4
-size = 100
+hives = [(0, 0)]
+dims = 10
+size = 1000
 trans_mat = transmat_simple(dims)
 problem = Farm(dims, hives, size, .1, trans_mat)
 
-print(problem.field)
-problem.pollinate(10)
-print(problem.field)
+
+problem.pollinateSeason(10,20)
 print(problem.pmelons)
 print(problem.melons)
+
+# print(problem.field)
+# problem.pollinateDay(40)
+# print(problem.field)
+# print(problem.pmelons)
+# print(problem.melons)
