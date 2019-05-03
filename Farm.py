@@ -2,6 +2,7 @@ import numpy as np
 from TransMatrix import *
 import matplotlib.pyplot as plt
 import seaborn as sns
+import operator
 
 
 # class for simulating bee pollination on a farm (modeled as a grid)
@@ -64,17 +65,36 @@ class Farm:
             self.field = self.of.copy()
 
 
+def optimize(dims,size,.1,trans_mat,steps,days):
+    totals = {}
+    for i in range(self.dims**2):
+        mod = i%dims
+        newi = i/dims
+        curr = Farm(dims,[(newi,mod)])
+        curr.pollinateSeason(steps,days)
+        totals[i] = np.sum(curr.pmelons)
+
+    max_value = max(totals.values())  # maximum value
+    max_keys = [k for k, v in totals.items() if v == max_value] # getting all keys containing the `maximum`
+
+    return max_value, max_keys
+
 # some test code
 hives = [(5, 5)]
 dims = 10
 size = 1000
 trans_mat = transmat_simple(dims)
 problem = Farm(dims, hives, size, .1, trans_mat)
-
-
 problem.pollinateSeason(10,20)
-print(problem.pmelons)
-print(problem.melons)
 
-ax = sns.heatmap(problem.pmelons)
-plt.show(ax)
+dims = 10
+size = 1000
+trans_mat = transmat_simple(dims)
+
+
+
+# print(problem.pmelons)
+# print(problem.melons)
+#
+# ax = sns.heatmap(problem.pmelons)
+# plt.show(ax)
