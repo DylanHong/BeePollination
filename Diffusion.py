@@ -1,7 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#From this link
 #https://scipython.com/book/chapter-7-matplotlib/examples/the-two-dimensional-diffusion-equation/
+
 # for i in range(1, nx-1):
 #     for j in range(1, ny-1):
 #         uxx = (u0[i+1,j] - 2*u0[i,j] + u0[i-1,j]) / dx2

@@ -89,13 +89,14 @@ trans_mat = transmat_simple(dims)
 problem = Farm(dims, hives, size, .1, trans_mat)
 problem.pollinateSeason(10,20)
 
-dims = 3
+dims = 5
 size = 100
 steps = 5
-days = 25
+days = 15
 trans_mat = transmat_simple(dims)
 vals = optimize(dims,size, .1,trans_mat,steps,days)
 print(vals)
+
 
 # print(problem.pmelons)
 # print(problem.melons)
