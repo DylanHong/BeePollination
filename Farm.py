@@ -18,16 +18,51 @@ class Farm:
 
         self.transition = trans_mat  # transition matrix for bee movement
 
+        self.melons = np.full((dims,dims), 100.0)
+        self.pmelons = np.zeros([dims,dims])
+
         # updates field to reflect hive locations (at start)
         for loc in self.locs:
             self.field[loc[0], loc[1]] = hive_size
+
+    def timestep(self):
+        #field = self.field
+        # reshape the matrix for multiplication
+        self.field = np.reshape(self.field, (1, self.dims**2))
+
+        # multiply the matrices
+        self.field = np.matmul(self.field, self.transition)
+        self.field = np.round(self.field)
+
+        # reshape back to original dimensions
+        self.field = np.reshape(self.field, (self.dims,self.dims))
+
+        #return field
+
+    def pollinate(self,steps):
+        for i in range(steps):
+            # update bee locations
+            self.timestep()
+
+            # update which melons are pollinated
+            self.pmelons += np.minimum(self.field,self.melons) * self.pr
+            self.pmelons = np.round(self.pmelons)
+
+            # remove pollinated melons from melons
+            self.melons = np.full((dims,dims), 100.0)
+
+            self.melons -= self.pmelons
+
 
 # some test code
 hives = [(0, 0), (3, 0)]
 dims = 4
 size = 100
 trans_mat = transmat_simple(dims)
-problem = Farm(dims, hives, size, .5, trans_mat)
+problem = Farm(dims, hives, size, .1, trans_mat)
 
 print(problem.field)
-print(problem.transition)
+problem.pollinate(10)
+print(problem.field)
+print(problem.pmelons)
+print(problem.melons)
