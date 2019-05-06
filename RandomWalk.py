@@ -50,7 +50,7 @@ def random_walk(x,y,dim1,dim2,steps,bees):
                     matrix[pos[0]-1][pos[1]] = matrix[pos[0]-1][pos[1]] + 1
                     pos = (pos[0]-1,pos[1])
 
-        print(matrix.sum())  # sanity check (should be num bees every time)
+        # print(matrix.sum())  # sanity check (should be num bees every time)
         visits = np.add(visits,matrix)  # add this bee's visits to overall
         visits = visits.astype("int")
 
@@ -58,6 +58,6 @@ def random_walk(x,y,dim1,dim2,steps,bees):
     return visits
 
 
-visits = random_walk(5,5,10,10,10,10)
-print(visits)
-print(np.sum(visits))  # sanity check (should be bees * steps)
+# visits = random_walk(5,5,10,10,10,10)
+# print(visits)
+# print(np.sum(visits))  # sanity check (should be bees * steps)

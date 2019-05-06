@@ -3,6 +3,7 @@ from TransMatrix import *
 import matplotlib.pyplot as plt
 import seaborn as sns
 import operator
+from RandomWalk import random_walk
 
 
 # class for simulating bee pollination on a farm (modeled as a grid)
@@ -64,6 +65,16 @@ class Farm:
             self.pollinateDay(steps)
             self.field = self.of.copy()
 
+    def pollinateRandWalk(self,steps,days):
+        visits = np.zeros((self.dims,self.dims))
+        for i in range(days):
+            for i in range(self.num_hives):
+                x, y = self.locs[i]
+                day = random_walk(x,y,self.dims,self.dims,steps,self.hive_size)
+                visits = np.add(day, visits)
+        return visits
+
+
 
 def optimize(dims,size,pr,trans_mat,steps,days):
     totals = {}
@@ -82,13 +93,14 @@ def optimize(dims,size,pr,trans_mat,steps,days):
     return max_value, max_keys
 
 # some test code
-# hives = [(5, 5)]
-# dims = 10
-# size = 1000
-# trans_mat = transmat_simple(dims)
-# problem = Farm(dims, hives, size, .1, trans_mat)
-# problem.pollinateSeason(10,20)
-#
+hives = [(5, 5)]
+dims = 10
+size = 1000
+trans_mat = transmat_simple(dims)
+problem = Farm(dims, hives, size, .1, trans_mat)
+x = problem.pollinateRandWalk(10,20)
+print(x)
+
 # dims = 5
 # size = 100
 # steps = 5
@@ -96,11 +108,3 @@ def optimize(dims,size,pr,trans_mat,steps,days):
 # trans_mat = transmat_simple(dims)
 # vals = optimize(dims,size, .1,trans_mat,steps,days)
 # print(vals)
-
-test = transmat_moderate(4)
-
-# print(problem.pmelons)
-# print(problem.melons)
-#
-# ax = sns.heatmap(problem.pmelons)
-# plt.show(ax)
