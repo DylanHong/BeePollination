@@ -16,5 +16,8 @@ print(x)
 problem2 = Farm(dims, hives, size, .2, trans_mat)
 problem2.pollinateSeason(30, 5)
 
-ax = sns.heatmap(problem2.pmelons, cmap='RdBu_r', annot=True, linewidths=.5)
+ax = sns.heatmap(problem2.pmelons, cmap='RdBu_r', annot=True, linewidths=.5,
+                 xticklabels=False, yticklabels=False, square=True)
+
+ax.set_title("Pollinated Watermelons per Square")
 plt.show(ax)
