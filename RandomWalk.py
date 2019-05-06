@@ -47,13 +47,14 @@ def move1(x,y,dim1,dim2,steps,bees):
                     pos = (pos[0]-1,pos[1])
 
         print(matrix.sum())
-        mastermatrix += np.add(mastermatrix,matrix)
+        mastermatrix = np.add(mastermatrix,matrix)
         mastermatrix = mastermatrix.astype("int")
     return mastermatrix
 
 
 rand = move1(5,5,10,10,10,10)
 print(rand)
+print(np.sum(rand))
 
 
 
