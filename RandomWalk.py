@@ -13,45 +13,46 @@ n = 1000
 #matrix = np.zeros([dim1,dim2])
 
 
-def move1(x,y,steps,dim1,dim2,bees):
+def move1(x,y,dim1,dim2,steps,bees):
     mastermatrix = np.zeros([dim1,dim2])
     for i in range(bees):
         matrix = np.zeros([dim1,dim2])
         pos = (x,y)
         matrix[pos[0],pos[1]] = 1
-        for i in range(steps):
+        for i in range(steps-1):
             val = random.randint(1,4)
             if val == 1:
-                if (pos[1] + 1) > dim2:
+                if (pos[1] + 1) >= dim2:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
                     matrix[pos[0]][pos[1]+1] = matrix[pos[0]][pos[1]+1] + 1
                     pos = (pos[0],pos[1]+1)
             elif val == 2:
-                if (pos[0] + 1) > dim1:
+                if (pos[0] + 1) >= dim1:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
                     matrix[pos[0]+1][pos[1]] = matrix[pos[0]+1][pos[1]] + 1
                     pos = (pos[0]+1,pos[1])
             elif val == 3:
-                if (pos[1] - 1) < 0:
+                if (pos[1] - 1) <= 0:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
                     matrix[pos[0]][pos[1]-1] = matrix[pos[0]][pos[1]-1] + 1
                     pos = (pos[0],pos[1]-1)
             else:
-                if (pos[0] - 1) < 0:
+                if (pos[0] - 1) <= 0:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
                     matrix[pos[0]-1][pos[1]] = matrix[pos[0]-1][pos[1]] + 1
                     pos = (pos[0]-1,pos[1])
 
         print(matrix.sum())
-        mastermatrix += matrix
+        mastermatrix += np.add(mastermatrix,matrix)
+        mastermatrix = mastermatrix.astype("int")
     return mastermatrix
 
 
-rand = move1(10,10,100,20,20,10)
+rand = move1(5,5,10,10,10,10)
 print(rand)
 
 
