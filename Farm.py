@@ -72,6 +72,15 @@ class Farm:
                 x, y = self.locs[i]
                 day = random_walk(x,y,self.dims,self.dims,steps,self.hive_size)
                 visits = np.add(day, visits)
+
+            # update which melons are pollinated
+            self.pmelons += np.minimum(visits,self.melons) * self.pr
+            self.pmelons = np.round(self.pmelons)
+
+            # remove pollinated melons from melons
+            self.melons = np.full((dims,dims), 100.0)
+            self.melons -= self.pmelons
+
         return visits
 
 
@@ -97,14 +106,18 @@ hives = [(5, 5)]
 dims = 10
 size = 1000
 trans_mat = transmat_simple(dims)
-problem = Farm(dims, hives, size, .1, trans_mat)
-x = problem.pollinateRandWalk(10,20)
+problem = Farm(dims, hives, size, .2, trans_mat)
+x = problem.pollinateRandWalk(5,10)
 print(x)
+print(problem.pmelons)
+print(np.sum(problem.pmelons))
 
-# dims = 5
-# size = 100
-# steps = 5
-# days = 15
-# trans_mat = transmat_simple(dims)
-# vals = optimize(dims,size, .1,trans_mat,steps,days)
-# print(vals)
+print('-------------')
+
+problem2 = Farm(dims, hives, size, .2, trans_mat)
+problem2.pollinateSeason(5,10)
+print(problem2.pmelons)
+print(np.sum(problem2.pmelons))
+
+ax = sns.heatmap(problem.pmelons, cmap='RdBu_r', annot=True, linewidths=.5)
+plt.show(ax)

@@ -38,13 +38,13 @@ def random_walk(x,y,dim1,dim2,steps,bees):
                     matrix[pos[0]+1][pos[1]] = matrix[pos[0]+1][pos[1]] + 1
                     pos = (pos[0]+1,pos[1])
             elif val == 3:
-                if (pos[1] - 1) <= 0:
+                if (pos[1] - 1) < 0:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
                     matrix[pos[0]][pos[1]-1] = matrix[pos[0]][pos[1]-1] + 1
                     pos = (pos[0],pos[1]-1)
             else:
-                if (pos[0] - 1) <= 0:
+                if (pos[0] - 1) < 0:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
                     matrix[pos[0]-1][pos[1]] = matrix[pos[0]-1][pos[1]] + 1
