@@ -3,24 +3,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 
-# defining the number of steps
-n = 1000
 
-#creating two array for containing x and y coordinate
-#of size equals to the number of size and filled up with 0's
+# function to simulate a random walk of n bees through a dim1 by dim2 field
+# starting at position (x, y)
+def random_walk(x,y,dim1,dim2,steps,bees):
 
+    # matrix tracking number of visits to each square
+    visits = np.zeros([dim1,dim2])
 
-#matrix = np.zeros([dim1,dim2])
-
-
-def move1(x,y,dim1,dim2,steps,bees):
-    mastermatrix = np.zeros([dim1,dim2])
+    # for each bee loop through n steps, adding to visit matrix
     for i in range(bees):
-        matrix = np.zeros([dim1,dim2])
-        pos = (x,y)
-        matrix[pos[0],pos[1]] = 1
+
+        matrix = np.zeros([dim1,dim2]) # empty matrix tracking bee's visits
+        pos = (x,y)  # starting position
+        matrix[pos[0],pos[1]] = 1  # add a visit to starting position
+
+        # loop through each step
         for i in range(steps-1):
-            val = random.randint(1,4)
+
+            val = random.randint(1,4)  # random value (to determine move)
+
+            # 1, 2, 3, 4 correspond to moving up, down, right or left
+            # each move increments the visits to that square by that bee
             if val == 1:
                 if (pos[1] + 1) >= dim2:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
@@ -46,63 +50,14 @@ def move1(x,y,dim1,dim2,steps,bees):
                     matrix[pos[0]-1][pos[1]] = matrix[pos[0]-1][pos[1]] + 1
                     pos = (pos[0]-1,pos[1])
 
-        print(matrix.sum())
-        mastermatrix = np.add(mastermatrix,matrix)
-        mastermatrix = mastermatrix.astype("int")
-    return mastermatrix
+        print(matrix.sum())  # sanity check (should be num bees every time)
+        visits = np.add(visits,matrix)  # add this bee's visits to overall
+        visits = visits.astype("int")
+
+    # returns overall visits by the bees
+    return visits
 
 
-rand = move1(5,5,10,10,10,10)
-print(rand)
-print(np.sum(rand))
-
-
-
-
-
-# def move(x,y,steps,dim1,dim2,bees):
-#     dayx = np.zeros(steps)
-#     dayy = np.zeros(steps)
-#
-#     matrix = np.zeros([dim1,dim2])
-#
-#     for i in range(bees):
-#         x = np.zeros(steps)
-#         y = np.zeros(steps)
-#         x[0] = 5
-#         y[0] = 5
-#         pos = (5,5)
-#         for i in range(1,steps):
-#             val = random.randint(1,4)
-#             if val == 1:
-#                 x[i] = x[i - 1] + 1
-#                 y[i] = y[i - 1]
-#                 matrix[i]
-#             elif val == 2:
-#                 x[i] = x[i - 1] - 1
-#                 y[i] = y[i - 1]
-#             elif val == 3:
-#                 x[i] = x[i - 1]
-#                 y[i] = y[i - 1] + 1
-#             else:
-#                 x[i] = x[i - 1]
-#                 y[i] = y[i - 1] - 1
-#         dayx += x
-#         dayy += y
-#
-#     return dayx,dayy
-#
-#
-# rand = move(3,3,100,6,6,10)
-# print(rand)
-#
-# plt.figure(1)
-# plt.scatter(rand[0],rand[1])
-# plt.show()
-
-
-# plotting stuff:
-# pylab.title("Random Walk ($n = " + str(n) + "$ steps)")
-# pylab.plot(x, y)
-# pylab.savefig("rand_walk"+str(n)+".png",bbox_inches="tight",dpi=600)
-# pylab.show()
+visits = random_walk(5,5,10,10,10,10)
+print(visits)
+print(np.sum(visits))  # sanity check (should be bees * steps)
