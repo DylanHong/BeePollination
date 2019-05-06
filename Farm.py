@@ -56,7 +56,7 @@ class Farm:
             self.pmelons = np.round(self.pmelons)
 
             # remove pollinated melons from melons
-            self.melons = np.full((dims,dims), 100.0)
+            self.melons = np.full((self.dims,self.dims), 100.0)
 
             self.melons -= self.pmelons
 
@@ -78,7 +78,7 @@ class Farm:
             self.pmelons = np.round(self.pmelons)
 
             # remove pollinated melons from melons
-            self.melons = np.full((dims,dims), 100.0)
+            self.melons = np.full((self.dims,self.dims), 100.0)
             self.melons -= self.pmelons
 
         return visits
@@ -101,23 +101,23 @@ def optimize(dims,size,pr,trans_mat,steps,days):
 
     return max_value, max_keys
 
-# some test code
-hives = [(5, 5)]
-dims = 10
-size = 1000
-trans_mat = transmat_simple(dims)
-problem = Farm(dims, hives, size, .2, trans_mat)
-x = problem.pollinateRandWalk(5,10)
-print(x)
-print(problem.pmelons)
-print(np.sum(problem.pmelons))
-
-print('-------------')
-
-problem2 = Farm(dims, hives, size, .2, trans_mat)
-problem2.pollinateSeason(5,10)
-print(problem2.pmelons)
-print(np.sum(problem2.pmelons))
-
-ax = sns.heatmap(problem.pmelons, cmap='RdBu_r', annot=True, linewidths=.5)
-plt.show(ax)
+# # some test code
+# hives = [(2, 2)]
+# dims = 10
+# size = 1000
+# trans_mat = transmat_simple(dims)
+# problem = Farm(dims, hives, size, .2, trans_mat)
+# x = problem.pollinateRandWalk(5,10)
+# print(x)
+# print(problem.pmelons)
+# print(np.sum(problem.pmelons))
+#
+# print('-------------')
+#
+# problem2 = Farm(dims, hives, size, .2, trans_mat)
+# problem2.pollinateSeason(5,10)
+# print(problem2.pmelons)
+# print(np.sum(problem2.pmelons))
+#
+# ax = sns.heatmap(problem.pmelons, cmap='RdBu_r', annot=True, linewidths=.5)
+# plt.show(ax)
