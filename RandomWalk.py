@@ -109,25 +109,25 @@ def random_walk_2(x,y,dim1,dim2,steps,bees):
                     matrix[pos[0]-1][pos[1]] = matrix[pos[0]-1][pos[1]] + 1
                     pos = (pos[0]-1,pos[1])
             elif val == 5:
-                if (pos[1] + 1) >= dim1 or (pos[0] + 1) >= dim0:
+                if (pos[1] + 1) >= dim1 or (pos[0] + 1) >= dim2:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
                     matrix[pos[0]+1][pos[1]+1] = matrix[pos[0]+1][pos[1]+1] + 1
                     pos = (pos[0]+1,pos[1]+1)
             elif val == 6:
-                if (pos[1] - 1) < 0 or (pos[0] + 1) >= dim0:
+                if (pos[0] - 1) < 0 or (pos[1] + 1) >= dim1:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
                     matrix[pos[0]-1][pos[1]+1] = matrix[pos[0]-1][pos[1]+1] + 1
                     pos = (pos[0]-1,pos[1]+1)
             elif val == 7:
-                if (pos[1] + 1) >= dim1 or (pos[0] - 1) < 0:
+                if (pos[0] + 1) >= dim1 or (pos[1] - 1) < 0:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
                     matrix[pos[0]+1][pos[1]-1] = matrix[pos[0]+1][pos[1]-1] + 1
                     pos = (pos[0]+1,pos[1]-1)
             elif val == 8:
-                if (pos[1] - 1) < 0 or (pos[0] - 1) < 0:
+                if (pos[0] - 1) < 0 or (pos[1] - 1) < 0:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
                     matrix[pos[0]-1][pos[1]-1] = matrix[pos[0]-1][pos[1]-1] + 1

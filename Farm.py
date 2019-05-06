@@ -3,7 +3,7 @@ from TransMatrix import *
 import matplotlib.pyplot as plt
 import seaborn as sns
 import operator
-from RandomWalk import random_walk
+from RandomWalk import random_walk, random_walk_2
 
 
 # class for simulating bee pollination on a farm (modeled as a grid)
@@ -83,6 +83,23 @@ class Farm:
 
         return visits
 
+    def pollinateRandWalk_2(self,steps,days):
+        visits = np.zeros((self.dims,self.dims))
+        for i in range(days):
+            for i in range(self.num_hives):
+                x, y = self.locs[i]
+                day = random_walk_2(x,y,self.dims,self.dims,steps,self.hive_size)
+                visits = np.add(day, visits)
+
+            # update which melons are pollinated
+            self.pmelons += np.minimum(visits,self.melons) * self.pr
+            self.pmelons = np.round(self.pmelons)
+
+            # remove pollinated melons from melons
+            self.melons = np.full((self.dims,self.dims), 100.0)
+            self.melons -= self.pmelons
+
+        return visits
 
 
 def optimize(dims,size,pr,trans_mat,steps,days):
