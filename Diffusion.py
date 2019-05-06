@@ -4,20 +4,33 @@ import matplotlib.pyplot as plt
 #From this link
 #https://scipython.com/book/chapter-7-matplotlib/examples/the-two-dimensional-diffusion-equation/
 
+# dx = 1
+# dy = 1
+# nx = 10
+# ny = 10
+# D = 2
+# u0 = 100 * np.ones((nx, ny))
+# u = np.empty((nx, ny))
+# dx2, dy2 = dx*dx, dy*dy
+# dt = dx2 * dy2 / (2 * D * (dx2 + dy2))
+#
+#
 # for i in range(1, nx-1):
 #     for j in range(1, ny-1):
 #         uxx = (u0[i+1,j] - 2*u0[i,j] + u0[i-1,j]) / dx2
 #         uyy = (u0[i,j+1] - 2*u0[i,j] + u0[i,j-1]) / dy2
 #         u[i,j] = u0[i,j] + dt * D * (uxx + uyy)
+#
+# print(u)
 
 # plate size, mm
 w = h = 10.
 # intervals in x-, y- directions, mm
-dx = dy = 0.1
+dx = dy = 1.
 # Thermal diffusivity of steel, mm2.s-1
-D = 4.
+D = 2.
 
-Tcool, Thot = 300, 700
+Tcool, Thot = 0, 1000
 
 nx, ny = int(w/dx), int(h/dy)
 
@@ -28,7 +41,7 @@ u0 = Tcool * np.ones((nx, ny))
 u = np.empty((nx, ny))
 
 # Initial conditions - ring of inner radius r, width dr centred at (cx,cy) (mm)
-r, cx, cy = 2, 5, 5
+r, cx, cy = 1, 5, 5
 r2 = r**2
 for i in range(nx):
     for j in range(ny):
