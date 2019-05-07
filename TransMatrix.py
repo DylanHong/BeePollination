@@ -80,3 +80,8 @@ def transmat_advanced2(dims):
                 matrix[i][max(0, j-dims)] += 0.2
 
     return np.transpose(matrix)
+
+
+# x = transmat_simple(4)
+# print(x)
+# print(np.transpose(x))
