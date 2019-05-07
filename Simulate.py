@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from TransMatrix import *
 
-hives = [(15, 15),(35, 35)]
+hives = [(25, 25)]
 dims = 50
 size = 4500
 trans_mat = transmat_simple(dims)
