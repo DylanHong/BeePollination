@@ -81,57 +81,64 @@ def random_walk_2(x,y,dim1,dim2,steps,bees):
         for i in range(steps-1):
 
             val = random.randint(1,9)  # random value (to determine move)
+            val2 = random.randint(1,7)
+            if val2 == 1 or val2 == 2 or val2 == 3:
+                val2 = 1
+            elif val2 == 4 or val2 == 5:
+                val2 = 2
+            else:
+                val2 = 3
 
             # 1, 2, 3, 4 correspond to moving up, down, right or left
             # each move increments the visits to that square by that bee
             if val == 1:
-                if (pos[1] + 1) >= dim2:
+                if (pos[1] + val2) >= dim2:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
-                    matrix[pos[0]][pos[1]+1] = matrix[pos[0]][pos[1]+1] + 1
-                    pos = (pos[0],pos[1]+1)
+                    matrix[pos[0]][pos[1]+val2] = matrix[pos[0]][pos[1]+val2] + 1
+                    pos = (pos[0],pos[1]+val2)
             elif val == 2:
-                if (pos[0] + 1) >= dim1:
+                if (pos[0] + val2) >= dim1:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
-                    matrix[pos[0]+1][pos[1]] = matrix[pos[0]+1][pos[1]] + 1
-                    pos = (pos[0]+1,pos[1])
+                    matrix[pos[0]+val2][pos[1]] = matrix[pos[0]+val2][pos[1]] + 1
+                    pos = (pos[0]+val2,pos[1])
             elif val == 3:
-                if (pos[1] - 1) < 0:
+                if (pos[1] - val2) < 0:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
-                    matrix[pos[0]][pos[1]-1] = matrix[pos[0]][pos[1]-1] + 1
-                    pos = (pos[0],pos[1]-1)
+                    matrix[pos[0]][pos[1]-val2] = matrix[pos[0]][pos[1]-val2] + 1
+                    pos = (pos[0],pos[1]-val2)
             elif val == 4:
-                if (pos[0] - 1) < 0:
+                if (pos[0] - val2) < 0:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
-                    matrix[pos[0]-1][pos[1]] = matrix[pos[0]-1][pos[1]] + 1
-                    pos = (pos[0]-1,pos[1])
+                    matrix[pos[0]-val2][pos[1]] = matrix[pos[0]-val2][pos[1]] + 1
+                    pos = (pos[0]-val2,pos[1])
             elif val == 5:
-                if (pos[1] + 1) >= dim1 or (pos[0] + 1) >= dim2:
+                if (pos[1] + val2) >= dim1 or (pos[0] + val2) >= dim2:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
-                    matrix[pos[0]+1][pos[1]+1] = matrix[pos[0]+1][pos[1]+1] + 1
-                    pos = (pos[0]+1,pos[1]+1)
+                    matrix[pos[0]+val2][pos[1]+val2] = matrix[pos[0]+val2][pos[1]+val2] + 1
+                    pos = (pos[0]+val2,pos[1]+val2)
             elif val == 6:
-                if (pos[0] - 1) < 0 or (pos[1] + 1) >= dim1:
+                if (pos[0] - val2) < 0 or (pos[1] + val2) >= dim1:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
-                    matrix[pos[0]-1][pos[1]+1] = matrix[pos[0]-1][pos[1]+1] + 1
-                    pos = (pos[0]-1,pos[1]+1)
+                    matrix[pos[0]-val2][pos[1]+val2] = matrix[pos[0]-val2][pos[1]+val2] + 1
+                    pos = (pos[0]-val2,pos[1]+val2)
             elif val == 7:
-                if (pos[0] + 1) >= dim1 or (pos[1] - 1) < 0:
+                if (pos[0] + val2) >= dim1 or (pos[1] - val2) < 0:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
-                    matrix[pos[0]+1][pos[1]-1] = matrix[pos[0]+1][pos[1]-1] + 1
-                    pos = (pos[0]+1,pos[1]-1)
+                    matrix[pos[0]+val2][pos[1]-val2] = matrix[pos[0]+val2][pos[1]-val2] + 1
+                    pos = (pos[0]+val2,pos[1]-val2)
             elif val == 8:
-                if (pos[0] - 1) < 0 or (pos[1] - 1) < 0:
+                if (pos[0] - val2) < 0 or (pos[1] - val2) < 0:
                     matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
                 else:
-                    matrix[pos[0]-1][pos[1]-1] = matrix[pos[0]-1][pos[1]-1] + 1
-                    pos = (pos[0]-1,pos[1]-1)
+                    matrix[pos[0]-val2][pos[1]-val2] = matrix[pos[0]-val2][pos[1]-val2] + 1
+                    pos = (pos[0]-val2,pos[1]-val2)
             else:
                 matrix[pos[0],pos[1]] = matrix[pos[0],pos[1]] + 1
 

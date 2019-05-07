@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import operator
 from RandomWalk import random_walk, random_walk_2
+import random
 
 
 # class for simulating bee pollination on a farm (modeled as a grid)
@@ -23,7 +24,9 @@ class Farm:
 
         self.transition = trans_mat  # transition matrix for bee movement
 
-        self.melons = np.full((dims,dims), 100.0)
+        self.mps = 10.0
+
+        self.melons = np.full((dims,dims), self.mps)
         self.pmelons = np.zeros([dims,dims])
 
         # updates field to reflect hive locations (at start)
@@ -56,7 +59,7 @@ class Farm:
             self.pmelons = np.round(self.pmelons)
 
             # remove pollinated melons from melons
-            self.melons = np.full((self.dims,self.dims), 100.0)
+            self.melons = np.full((self.dims,self.dims), self.mps)
 
             self.melons -= self.pmelons
 
@@ -78,7 +81,7 @@ class Farm:
             self.pmelons = np.round(self.pmelons)
 
             # remove pollinated melons from melons
-            self.melons = np.full((self.dims,self.dims), 100.0)
+            self.melons = np.full((self.dims,self.dims), self.mps)
             self.melons -= self.pmelons
 
         return visits
@@ -91,12 +94,18 @@ class Farm:
                 day = random_walk_2(x,y,self.dims,self.dims,steps,self.hive_size)
                 visits = np.add(day, visits)
 
-            # update which melons are pollinated
             self.pmelons += np.minimum(visits,self.melons) * self.pr
-            self.pmelons = np.round(self.pmelons)
+
+            # if random.random() < 0.5:
+            #     self.pmelons = np.ceil(self.pmelons)
+            # else:
+            #     self.pmelons = np.floor(self.pmelons)
+
+
+            self.pmelons = np.ceil(self.pmelons)
 
             # remove pollinated melons from melons
-            self.melons = np.full((self.dims,self.dims), 100.0)
+            self.melons = np.full((self.dims,self.dims), self.mps)
             self.melons -= self.pmelons
 
         return visits
