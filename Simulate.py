@@ -7,13 +7,13 @@ from TransMatrix import *
 hives = [(25, 25)]
 dims = 50
 size = 4500
-trans_mat = transmat_simple(dims)
+trans_mat = transmat_moderate(dims)
 #problem = Farm(dims, hives, size, .2, trans_mat)
 #x = problem.pollinateRandWalk(200, 10)
 
 
 problem2 = Farm(dims, hives, size, .23, trans_mat)
-problem2.pollinateRandWalk_2(24,10)
+problem2.pollinateSeason(24,10)
 
 ax = sns.heatmap(problem2.pmelons, cmap='coolwarm', annot=False, linewidths=0,
                  xticklabels=False, yticklabels=False, square=True, vmax=10,

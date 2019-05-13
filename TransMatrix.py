@@ -35,11 +35,10 @@ def transmat_moderate(dims):
                 matrix[i][max(0, j-1)] += 0.1
                 matrix[i][min(j+dims, dim_trans-1)] += 0.1
                 matrix[i][max(0, j-dims)] += 0.1
-
-                matrix[i+1][min(dim_trans-1, j+1)] += 0.1
-                matrix[i+1][max(0, j-1)] += 0.1
-                matrix[i-1][min(j+dims, dim_trans-1)] += 0.1
-                matrix[i-1][max(0, j-dims)] += 0.1
+                matrix[i][max(0, j-dims-1)] += 0.1
+                matrix[i][max(0, j-dims+1)] += 0.1
+                matrix[i][min(j+dims+1, dim_trans-1)] += 0.1
+                matrix[i][min(j+dims-1, dim_trans-1)] += 0.1
 
     return np.transpose(matrix)
 

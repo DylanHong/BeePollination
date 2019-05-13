@@ -56,7 +56,7 @@ class Farm:
 
             # update which melons are pollinated
             self.pmelons += np.minimum(self.field,self.melons) * self.pr
-            self.pmelons = np.round(self.pmelons)
+            self.pmelons = np.ceil(self.pmelons)
 
             # remove pollinated melons from melons
             self.melons = np.full((self.dims,self.dims), self.mps)
